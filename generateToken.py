@@ -1,7 +1,7 @@
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
-from os import path
+from os import path, remove
 from json import load
 
 def generateToken():
@@ -17,11 +17,13 @@ def generateToken():
     )
 
   if creds and creds.expired and creds.refresh_token:
+    # remove the old signed in token file and request a new one from Google
+    remove('token.json')
     creds.refresh(Request())
 
   elif not creds or not creds.valid:
     flow = InstalledAppFlow.from_client_secrets_file(
-      path.join(path.dirname(__file__), 'TTP_CLIENT.json'),
+      path.join(path.dirname(__file__), 'credentials.json'),
       sheet['scopes']
     )
     creds = flow.run_local_server(port=0)
