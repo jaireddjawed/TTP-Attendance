@@ -84,9 +84,14 @@ def main():
     elif choice == 'q':
       break
     else:
-      # get the first name and last name of student from card swipe
-      firstName, lastName = parseCardSwipeInput(choice)
-      addStudentCardSwipe(sheet['spreadsheetId'], service, firstName, lastName)
+      try:
+        # get the first name and last name of student from card swipe
+        firstName, lastName = parseCardSwipeInput(choice)
+        addStudentCardSwipe(sheet['spreadsheetId'], service, firstName, lastName)
+      except:
+        print('Invalid card swipe. Please try again.')
+        sleep(0.5)
+        clearTerminal()
 
 if __name__ == '__main__':
   main()
