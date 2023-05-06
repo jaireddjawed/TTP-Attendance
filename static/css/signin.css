@@ -4,15 +4,14 @@ html {
   width: 100%;
   overflow: hidden;
 }
-
 body {
   margin: 0px;
   min-height: 100%;
   width: 100%;
-
   background-color: #00274d;
   background-image: url(../img/desktop-bg.png);
   background-repeat: no-repeat;
+  background-size: 100% auto;
 }
 .container {
   display: flex;
