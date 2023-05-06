@@ -20,7 +20,7 @@ function submitSignInInformation(firstName, lastName, studentId) {
       alert('There was an error signing you in. Please try again.');
     }
     else {
-      window.location.href = '/success';
+      window.location.href = '/success?firstName=' + firstName + '&lastName=' + lastName;
     }
   });
 }
