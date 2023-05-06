@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BCOE Transfer Student Center Sign-In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Fira+Sans&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="./static/css/signin.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="./static/img/ttp-logo.jpg" alt="Transfer Student Center Logo">
+    </div>
+
+    <form class="form">
+      <div class="form-group">
+        <label for="first-name">First Name</label>
+        <input type="text" name="first-name" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="first-name">Last Name</label>
+        <input type="text" name="last-name" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="first-name">Student ID</label>
+        <input type="text" name="student-id" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Sign In</button>
+      </div>
+
+      <input type="text" autofocus name="id-card-reader" style="opacity: 0;"/>
+    </form>
+  </div>
+
+  <p id="made-with">Made with ❤️ by Jaired Jawed.</p>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/jquery.validate.min.js"></script>
+  <script src="./static/js/signin.js"></script>
+</body>
+</html>

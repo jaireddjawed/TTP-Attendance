@@ -1,0 +1,96 @@
+html {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0px;
+  min-height: 100%;
+  width: 100%;
+
+  background-color: #00274d;
+  background-image: url(../img/desktop-bg.png);
+  background-repeat: no-repeat;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+img {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 40px;
+}
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.form-group {
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+.error {
+  color: red;
+  margin-top: 5px;
+}
+label {
+  display: block;
+  padding: 0 0 .5rem;
+  text-align: left;
+  font-size: 1rem;
+  font-family: "Oswald", "Fira Sans", sans-serif;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+}
+input[type="text"], input[type="button"], input[type="password"], input[type="number"], input[type="email"], textarea, button {
+  border-radius: 0;
+  box-sizing: border-box;
+  color: #003466;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+  height: 4.5rem;
+  width: 100%;
+  padding: 0 1.0rem;
+  vertical-align: top;
+}
+input[type="text"]:focus, input[type="button"]:focus, input[type="password"]:focus, input[type="number"]:focus, input[type="email"]:focus {
+  outline: none;
+  border-color: #FFB81C;
+  border-width: 0.4rem;
+}
+button, .btn, input[type="button"], input[type="submit"] {
+  background: #FFB81C;
+  border: solid 0.4rem #FFB81C;
+  border-radius: 0.8rem;
+  color: #003466;
+  width: 100%;
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+p {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color:white;
+  margin-bottom: 10px;
+  margin-right: 15px;
+  font-family: cursive;
+}
