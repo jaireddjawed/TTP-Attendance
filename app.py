@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
+import webbrowser
 
 app = Flask(__name__)
+PORT = 5000
 
 @app.route('/', methods=['GET'])
 def renderSignInPage():
@@ -21,4 +23,5 @@ def submitSignIn():
         return 'Internal Server Error', 500
 
 if __name__ == '__main__':
-   app.run()
+    webbrowser.open(f'http://127.0.0.1:{PORT}/')
+    app.run(port=PORT)
