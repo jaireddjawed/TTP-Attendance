@@ -3,8 +3,9 @@
 
 const urlParams = new URLSearchParams(window.location.search);
 const firstName = urlParams.get('firstName');
+const lastName = urlParams.get('lastName');
 
-document.querySelector('.welcome-title').innerHTML = `Welcome ${firstName}!`;
+document.querySelector('.welcome-title').innerHTML = `Welcome ${firstName} ${lastName}!`;
 document.querySelector('.time').innerHTML = new Date().toLocaleString();
 
 // after successful signin, the success page is displayed
