@@ -46,6 +46,7 @@ $(document).ready(function() {
       'student-id': {
         required: true,
         minlength: 9,
+        maxlength: 9,
         digits: true,
       },
     },
@@ -59,6 +60,7 @@ $(document).ready(function() {
       'student-id': {
         required: 'Please enter your student id.',
         minlength: 'Your student id number must be 9 digits long.',
+        maxlength: 'Your student id number must be 9 digits long.',
         digits: 'Your student id number can only contain digits.',
       },
     },
