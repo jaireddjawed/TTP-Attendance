@@ -1,3 +1,5 @@
+// todo: request permission to use full screen mode
+
 /*
   * This function submits the sign in information to the server
   * and redirects the user to the success page if the sign in was successful.
@@ -20,6 +22,7 @@ function submitSignInInformation(firstName, lastName, studentId) {
       alert('There was an error signing you in. Please try again.');
     }
     else {
+      // todo: figure out a way to remove middle initial from firstName
       window.location.href = '/success?firstName=' + firstName + '&lastName=' + lastName;
     }
   });
@@ -42,6 +45,8 @@ $(document).ready(function() {
       },
       'student-id': {
         required: true,
+        minlength: 9,
+        digits: true,
       },
     },
     messages: {
@@ -53,6 +58,8 @@ $(document).ready(function() {
       },
       'student-id': {
         required: 'Please enter your student id.',
+        minlength: 'Your student id number must be 9 digits long.',
+        digits: 'Your student id number can only contain digits.',
       },
     },
     submitHandler: function(form) {
@@ -78,7 +85,8 @@ document.querySelector('input[name="id-card-reader"]').addEventListener('keydown
   } catch (error) {
     return;
   }
-
+  // todo: figure out a way to handle a case where someone types on the keyboard and a card is swiped
+  // so that the old keyboard input is not submitted
   const [, lastName, firstName] = fullName;
   submitSignInInformation(firstName, lastName, '');
 });
