@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
-from datetime import datetime
 import webbrowser
+import os
+import googlesheetsfunctions
 
 app = Flask(__name__)
 PORT = 5000
@@ -15,23 +16,30 @@ def renderSuccessPage():
 
 @app.route('/submit-signin', methods=['POST'])
 def submitSignIn():
-    # todo: submit sign in info to google sheet
-    # for now, simply write the sign in info to a text file
     try:
-        signInInfo = request.get_json()
-        with open('signins.txt', 'a') as f:
-            if signInInfo['student-id'] == '':
-                signInInfo['student-id'] = 'N/A'
+        # check if google sheets authenication token is valid and not expired
+        creds = googlesheetsfunctions.checkIfTokenIsValid()
 
-            f.write(f'{signInInfo["first-name"]}, {signInInfo["last-name"]}, {signInInfo["student-id"]}, {datetime.now().strftime("%m/%d/%Y %H:%M:%S %p")} \n')
+        # add the student sign in to the google sheet
+        signInInfo = request.get_json()
+        googlesheetsfunctions.addStudentSignInToGoogleSheet(creds, signInInfo)
 
         # send a success status code and also indicate that data was created (201)
         return 'success', 201
-    except:
-        # send a server error status code
+    except Exception as e:
+        # print an exception and send the error status code
+        print(f'An error occurred: {e}.')
         return 'Internal Server Error', 500
 
 if __name__ == '__main__':
-    # todo: check if google credentials exist or are expired
+    # credentials.json file is required for google sheets to be able to authenticate
+    if not os.path.exists('credentials.json'):
+        print('An error occrred: credentials.json file does not exist. Please download the credentials.json file from the Google API Console and place in this directory.')
+        exit(0)
+
+    # verify if token.json is not expired before running the application
+    googlesheetsfunctions.checkIfTokenIsValid()
+
+    # open the browser to the sign in page
     webbrowser.open(f'http://127.0.0.1:{PORT}/')
     app.run(port=PORT)
