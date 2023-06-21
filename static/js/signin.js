@@ -22,7 +22,10 @@ function submitSignInInformation(firstName, lastName, studentId) {
       alert('There was an error signing you in. Please try again.');
     }
     else {
-      // todo: figure out a way to remove middle initial from firstName
+      // if statement just for Marisol 😂
+      if (firstName === 'MARISO') {
+        firstName = 'MARISOL';
+      }
       window.location.href = '/success?firstName=' + firstName + '&lastName=' + lastName;
     }
   });
