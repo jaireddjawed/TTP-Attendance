@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import webbrowser
 import os
-import googlesheetsfunctions
+import gsheethelpers
 
 app = Flask(__name__)
 PORT = 5000
@@ -9,6 +9,10 @@ PORT = 5000
 @app.route('/', methods=['GET'])
 def renderSignInPage():
     return render_template('signin.html')
+
+@app.route('/major', methods=['GET'])
+def renderMajorPage():
+    return render_template('major.html')
 
 @app.route('/success', methods=['GET'])
 def renderSuccessPage():
@@ -18,11 +22,11 @@ def renderSuccessPage():
 def submitSignIn():
     try:
         # check if google sheets authenication token is valid and not expired
-        creds = googlesheetsfunctions.checkIfTokenIsValid()
+        creds = gsheethelpers.checkIfTokenIsValid()
 
         # add the student sign in to the google sheet
         signInInfo = request.get_json()
-        googlesheetsfunctions.addStudentSignInToGoogleSheet(creds, signInInfo)
+        gsheethelpers.addStudentSignInToGoogleSheet(creds, signInInfo)
 
         # send a success status code and also indicate that data was created (201)
         return 'success', 201
@@ -38,7 +42,7 @@ if __name__ == '__main__':
         exit(0)
 
     # verify if token.json is not expired before running the application
-    googlesheetsfunctions.checkIfTokenIsValid()
+    gsheethelpers.checkIfTokenIsValid()
 
     # open the browser to the sign in page
     webbrowser.open(f'http://127.0.0.1:{PORT}/')
