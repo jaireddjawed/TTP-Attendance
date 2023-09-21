@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BCOE Transfer Student Center Sign-In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Fira+Sans&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="./static/css/main.css" rel="stylesheet" type="text/css" />
+  <link href="./static/css/major.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="./static/img/ttp-logo.jpg" alt="Transfer Student Center Logo">
+    </div>
+
+    <form class="form" autocomplete="off">
+      <div class="form-group">
+        <label for="engineering-major">Major</label>
+        <select name="engineering-major" class="form-control">
+          <option value=""></option>
+          <option value="bioengineering">Bioengineering</option>
+          <option value="chemical-engineering">Chemical Engineering</option>
+          <option value="computer-engineering">Computer Engineering</option>
+          <option value="computer-science">Computer Science</option>
+          <option value="computer-science-business-applicatiosn">Computer Science w/ Business Applications</option>
+          <option value="data-science">Data Science</option>
+          <option value="electrical-engineering">Electrical Engineering</option>
+          <option value="environmental-engineering">Environmental Engineering</option>
+          <option value="material-science-engineering">Material Science & Engineering</option>
+          <option value="mechanical-engineering">Mechanical Engineering</option>
+          <option value="robotics">Robotics</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group other">
+        <input class="form-control" type="text" name="other-major" placeholder="Enter your major here">
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <p id="made-with">Made with ❤️ by Jaired Jawed.</p>
+  <script src="./static/js/major.js"></script>
+</body>
+</html>
