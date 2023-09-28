@@ -35,7 +35,6 @@ def submitMajor():
 
         return 'success', 200
     except Exception as e:
-        print('error: ', e)
         # print an exception and send the error status code
         return 'Internal Server Error', 500
 
@@ -68,7 +67,6 @@ def submitSignIn():
         # send a success status code and also indicate that data was created (201)
         return 'success', 201
     except Exception as e:
-        print('error: ', e)
         # print an exception and send the error status code
         return 'Internal Server Error', 500
 

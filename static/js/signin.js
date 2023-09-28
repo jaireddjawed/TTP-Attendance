@@ -91,7 +91,7 @@ $(document).ready(function() {
  * This event listener is for the id card reader. Once a student swipes their id card, it parses their
  * first and last name from the id card string and submits the sign in form.
  */
-document.querySelector('input[name="id-card-reader"]').addEventListener('keydown', (event) => {
+document.querySelector('input[name="id-card-reader"]').addEventListener('change', (event) => {
   let fullName, studentId;
 
   try {
@@ -104,7 +104,7 @@ document.querySelector('input[name="id-card-reader"]').addEventListener('keydown
   } catch (error) {
     return;
   }
-  const [, lastName, firstName] = fullName;
+  const [lastName, firstName] = fullName;
   submitSignInInformation(firstName, lastName, studentId);
 });
 
