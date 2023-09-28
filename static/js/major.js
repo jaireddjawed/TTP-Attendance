@@ -35,8 +35,36 @@ $(document).ready(function() {
         required: 'Please enter your major.',
       },
     },
-    submitHandler: function(form) {
+    submitHandler: function() {
+      const params = new URLSearchParams(window.location.search);
 
+      const firstName = params.get('firstName'),
+            lastName = params.get('lastName'),
+            studentId = params.get('studentId');
+
+      const engineeringMajor = document.querySelector('select[name="engineering-major"]').value,
+            otherMajor = document.querySelector('input[name="other-major"]').value;
+
+      fetch('/submit-major', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          'first-name': firstName,
+          'last-name': lastName,
+          'student-id': studentId,
+          'major': engineeringMajor === 'Other' ? otherMajor : engineeringMajor,
+        }),
+      })
+      .then(response => {
+        if (!response.ok) {
+          alert('There was an error signing you in. Please try again.');
+          return;
+        }
+
+        window.location.href = `/success?firstName=${firstName}&lastName=${lastName}`;
+      });
     },
   });
 });
