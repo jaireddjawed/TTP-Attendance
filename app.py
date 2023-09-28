@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import webbrowser
 import os
 import gsheethelpers
@@ -26,6 +26,22 @@ def submitSignIn():
 
         # add the student sign in to the google sheet
         signInInfo = request.get_json()
+
+        # get list of all students that have signed in before
+        students = gsheethelpers.getAllStudentsInDirectory(creds)
+        studentExists = False
+
+        for student in students:
+            studentId = student[2]
+            if studentId == signInInfo['student-id']:
+                studentExists = True
+                break
+
+        # students who have not signed in before will have to select their major
+        # the will be redirected on the client-side
+        if not studentExists:
+            return 'student-not-exist', 200
+
         gsheethelpers.addStudentSignInToGoogleSheet(creds, signInInfo)
 
         # send a success status code and also indicate that data was created (201)

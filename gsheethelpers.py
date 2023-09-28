@@ -48,7 +48,6 @@ def createNewSheetForMonthIfNeeded(creds):
 
         # check if the current month sheet exists, if not create it
         currentMonthSheetExists = False
-        print(sheets)
         for sheet in sheets:
             if sheet['properties']['title'] == monthSheetName:
                 currentMonthSheetExists = True
@@ -114,17 +113,36 @@ def addStudentSignInToGoogleSheet(creds, signInInfo):
                 range=f'{sheetName}!A1:E1000',
                 valueInputOption='USER_ENTERED',
                 body={
-                'values': [[
-                    signInInfo['first-name'],
-                    signInInfo['last-name'],
-                    signInInfo['student-id'],
-                    signInDate,
-                    signInTime,
-                    ''
-                ]]
+                    'values': [[
+                        signInInfo['first-name'],
+                        signInInfo['last-name'],
+                        signInInfo['student-id'],
+                        signInDate,
+                        signInTime,
+                    ]]
                 }
             ).execute()
     except IOError:
        print("Error: Could not retrieve attendance sheet information. Please make sure that the sheetInfo.json file exists in the main directory.")
+    except Exception as e:
+        print("Error:", e)
+
+'''
+    Gets all students within the student directory sheet, used to keep track of students' majors.
+'''
+def getAllStudentsInDirectory(creds):
+    try:
+        with open('sheetInfo.json', 'r') as sheetInfoFile:
+            sheetInfo = json.loads(sheetInfoFile.read())
+            service = build('sheets', 'v4', credentials=creds)
+
+            students = service.spreadsheets().values().get(
+                spreadsheetId=sheetInfo['spreadsheetId'],
+                range='Students!A1:E2000'
+            ).execute()['values']
+
+            return students
+    except IOError:
+        print("Error: Could not retrieve student directory information. Please make sure that the sheetInfo.json file exists in the main directory.")
     except Exception as e:
         print("Error:", e)

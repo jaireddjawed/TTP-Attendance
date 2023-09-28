@@ -20,13 +20,23 @@ function submitSignInInformation(firstName, lastName, studentId) {
   .then(response => {
     if (!response.ok) {
       alert('There was an error signing you in. Please try again.');
+      return;
     }
-    else {
-      // if statement just for Marisol 😂
-      if (firstName === 'MARISO') {
-        firstName = 'MARISOL';
-      }
+
+    return response.text();
+  })
+  .then(message => {
+    // if statement just for Marisol 😂
+    if (firstName === 'MARISO') {
+      firstName = 'MARISOL';
+    }
+
+    // redirect to success page or major page depending on whether the student has already signed in before
+    if (message === 'success') {
       window.location.href = '/success?firstName=' + firstName + '&lastName=' + lastName;
+    }
+    else if (message === 'student-not-exist') {
+      window.location.href = '/major?firstName=' + firstName + '&lastName=' + lastName + '&studentId=' + studentId;
     }
   });
 }
@@ -90,8 +100,6 @@ document.querySelector('input[name="id-card-reader"]').addEventListener('keydown
   } catch (error) {
     return;
   }
-  // todo: figure out a way to handle a case where someone types on the keyboard and a card is swiped
-  // so that the old keyboard input is not submitted
   const [, lastName, firstName] = fullName;
   submitSignInInformation(firstName, lastName, '');
 });
