@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 import webbrowser
 import os
 import gsheethelpers
@@ -17,6 +17,26 @@ def renderMajorPage():
 @app.route('/success', methods=['GET'])
 def renderSuccessPage():
     return render_template('success.html')
+
+@app.route('/submit-major', methods=['POST'])
+def submitMajor():
+    try:
+        # check if google sheets authenication token is valid and not expired
+        creds = gsheethelpers.checkIfTokenIsValid()
+
+        # add the student sign in to the google sheet
+        signInInfo = request.get_json()
+
+        # add the student to the student directory sheet
+        gsheethelpers.addStudentToDirectory(creds, signInInfo)
+
+        # add the student to the sign in sheet for the current month
+        gsheethelpers.addStudentSignInToGoogleSheet(creds, signInInfo)
+
+        return 'success', 200
+    except Exception as e:
+        # print an exception and send the error status code
+        return 'Internal Server Error', 500
 
 @app.route('/submit-signin', methods=['POST'])
 def submitSignIn():
