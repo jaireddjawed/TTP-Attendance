@@ -32,7 +32,6 @@ def submitSignIn():
         return 'success', 201
     except Exception as e:
         # print an exception and send the error status code
-        print(f'An error occurred: {e}.')
         return 'Internal Server Error', 500
 
 if __name__ == '__main__':
