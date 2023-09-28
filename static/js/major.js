@@ -11,7 +11,32 @@ engineeringMajorDropdown.addEventListener("change", (event) => {
   }
 });
 
-document.querySelector('form').addEventListener('submit', (event) => {
-  event.preventDefault();
+/*
+ * form validation to ensure that everyone
+ * fills out every field before submitting
+ * the sign in form
+ */
 
+$(document).ready(function() {
+  $('.form').validate({
+    rules: {
+      'engineering-major': {
+        required: true,
+      },
+      'other-major': {
+        required: true,
+      },
+    },
+    messages: {
+      'engineering-major': {
+        required: 'Please select a major.',
+      },
+      'other-major': {
+        required: 'Please enter your major.',
+      },
+    },
+    submitHandler: function(form) {
+
+    },
+  });
 });
