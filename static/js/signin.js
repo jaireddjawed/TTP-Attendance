@@ -92,16 +92,20 @@ $(document).ready(function() {
  * first and last name from the id card string and submits the sign in form.
  */
 document.querySelector('input[name="id-card-reader"]').addEventListener('keydown', (event) => {
-  let fullName;
+  let fullName, studentId;
 
   try {
     const idString = document.querySelector('input[name="id-card-reader"]').value;
     fullName = idString.split('^')[1].split('/');
+
+    studentId = idString.split('^')[2]
+    studentId = studentId.substring(12, 21)
+
   } catch (error) {
     return;
   }
   const [, lastName, firstName] = fullName;
-  submitSignInInformation(firstName, lastName, '');
+  submitSignInInformation(firstName, lastName, studentId);
 });
 
 /*
