@@ -146,3 +146,22 @@ def getAllStudentsInDirectory(creds):
         print("Error: Could not retrieve student directory information. Please make sure that the sheetInfo.json file exists in the main directory.")
     except Exception as e:
         print("Error:", e)
+
+def addStudentToDirectory(creds, student):
+    with open('sheetInfo.json', 'r') as sheetInfoFile:
+        sheetInfo = json.loads(sheetInfoFile.read())
+        service = build('sheets', 'v4', credentials=creds)
+
+        service.spreadsheets().values().append(
+            spreadsheetId=sheetInfo['spreadsheetId'],
+            range=f'Students!A1:E2000',
+            valueInputOption='USER_ENTERED',
+            body={
+                'values': [[
+                    student['first-name'],
+                    student['last-name'],
+                    student['student-id'],
+                    student['major'],
+                ]]
+            }
+        ).execute()
