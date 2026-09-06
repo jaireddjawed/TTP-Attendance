@@ -1,0 +1,15 @@
+{
+	"fixed": {
+		"file_version": "3.0.0"
+	},
+	"info": {
+		"0000": {
+			"ProductVersion": "3.0.0",
+			"CompanyName": "UC Riverside BCOE",
+			"FileDescription": "Student attendance for the BCOE Transfer Student Center",
+			"LegalCopyright": "(c) 2026, Jaired Jawed",
+			"ProductName": "TTP Attendance",
+			"Comments": "Sign in by form or student id card; each sign-in is appended to a Google Sheet."
+		}
+	}
+}

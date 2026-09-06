@@ -1,0 +1,405 @@
+/*
+ * The palette and layout carry over from the Flask version's static/css:
+ * UCR navy behind everything, gold for anything you press.
+ */
+
+@font-face {
+  font-family: "Oswald";
+  src: url("/fonts/oswald-latin.woff2") format("woff2");
+  font-weight: 200 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("/fonts/open-sans-latin.woff2") format("woff2");
+  font-weight: 300 800;
+  font-display: swap;
+}
+
+:root {
+  --navy: #00274d;
+  --navy-ink: #003466;
+  --gold: #ffb81c;
+  --orange: #ff8c00;
+  --error: #ff6b6b;
+
+  --heading-font: "Oswald", "Fira Sans", system-ui, sans-serif;
+  --body-font: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--navy);
+  background-image: url("/img/desktop-bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  font-family: var(--body-font);
+  color: #fff;
+  /* The kiosk is driven by a card reader, so stray text selection is only noise. */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Layout ------------------------------------------------------------------ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.container-centered {
+  align-items: center;
+  text-align: center;
+}
+
+.container-scroll {
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+.logo img {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 420px;
+  align-self: center;
+}
+
+.form-group {
+  width: 100%;
+  margin: 10px 0 12px;
+}
+
+.prompt {
+  margin: 20px auto 0;
+  max-width: 420px;
+  text-align: center;
+  font-family: var(--heading-font);
+  font-size: 1.1rem;
+}
+
+/* Controls ---------------------------------------------------------------- */
+
+label {
+  display: block;
+  padding: 0 0 0.5rem;
+  font-family: var(--heading-font);
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.form-control {
+  width: 100%;
+  height: 4rem;
+  padding: 0 1rem;
+  border: none;
+  border-radius: 0;
+  color: var(--navy-ink);
+  background: #fff;
+  font-family: var(--body-font);
+  font-size: 1.5rem;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+select.form-control {
+  height: 4rem;
+  padding: 0 0.8rem;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 0.4rem var(--gold);
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  height: 4rem;
+  padding: 0 1rem;
+  border: solid 0.4rem var(--gold);
+  border-radius: 0.8rem;
+  background: var(--gold);
+  color: var(--navy-ink);
+  font-family: var(--body-font);
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.link {
+  margin-top: 12px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--gold);
+  font-family: var(--body-font);
+  font-size: 1rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* The card reader types into this field; it must be focusable but unseen. */
+.card-reader {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Messages ---------------------------------------------------------------- */
+
+.error {
+  margin: 5px 0 0;
+  color: var(--error);
+  font-size: 0.95rem;
+}
+
+.error-banner {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.notice {
+  margin: 16px auto 0;
+  padding: 12px 16px;
+  max-width: 420px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.notice .link {
+  margin: 0;
+}
+
+.made-with {
+  position: fixed;
+  right: 15px;
+  bottom: 10px;
+  margin: 0;
+  color: #fff;
+  font-family: Garamond, serif;
+}
+
+/* Settings entry point ---------------------------------------------------- */
+
+.settings-button {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+}
+
+.settings-button:hover {
+  color: var(--gold);
+}
+
+.settings-button svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Success ----------------------------------------------------------------- */
+
+.welcome-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 24px;
+  width: min(800px, 100%);
+  min-height: 300px;
+  padding: 24px;
+  background-color: var(--orange);
+  color: var(--navy-ink);
+}
+
+.ucr-logo {
+  width: 100px;
+  height: 100px;
+}
+
+.welcome-title,
+.welcome-time {
+  margin: 0 0 8px;
+  color: var(--navy-ink);
+}
+
+.welcome-title {
+  font-size: 2.4rem;
+}
+
+/* Settings ---------------------------------------------------------------- */
+
+.panel {
+  width: min(640px, 100%);
+  margin: 40px auto;
+  padding: 28px 32px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.panel-title {
+  margin: 0;
+  font-family: var(--heading-font);
+  text-transform: uppercase;
+}
+
+.panel-intro {
+  margin: 8px 0 24px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.setting {
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.setting h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px;
+  font-family: var(--heading-font);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+}
+
+.setting p {
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.setting-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.setting-row .form-control {
+  flex: 1 1 260px;
+  height: 3rem;
+  font-size: 1rem;
+}
+
+.setting-row .btn {
+  width: auto;
+  height: 3rem;
+  font-size: 1rem;
+}
+
+.setting-row .link {
+  margin: 0;
+}
+
+.status {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.step-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.step-mark-done {
+  background: var(--gold);
+  color: var(--navy-ink);
+}
+
+.panel-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.panel-footer .btn {
+  width: auto;
+  height: 3.4rem;
+}
+
+.panel-footer .link {
+  margin: 0;
+}
+
+.panel-path {
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.8rem;
+  word-break: break-all;
+  user-select: text;
+  -webkit-user-select: text;
+}

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=TTP Attendance
+Comment=Student attendance for the BCOE Transfer Student Center
+# The Exec line includes %u to pass the URL to the application
+Exec=/usr/local/bin/TTP Attendance %u
+Terminal=false
+Type=Application
+Icon=TTP Attendance
+Categories=Utility;
+StartupWMClass=TTP Attendance
+
+ 

@@ -1,4 +1,19 @@
-token.json
-credentials.json
-__pycache__
 .DS_Store
+.task
+bin
+frontend/dist
+frontend/node_modules
+
+# Google credentials. These normally live in the per-user config directory, but
+# the app also reads them from here, so never let them be committed.
+credentials.json
+token.json
+
+build/linux/appimage/build
+build/windows/nsis/MicrosoftEdgeWebview2Setup.exe
+
+# Mobile generated (per-machine; overlays hold absolute paths)
+build/ios/xcode/overlay.json
+build/ios/xcode/gen/
+build/android/overlay.json
+build/android/gen/
